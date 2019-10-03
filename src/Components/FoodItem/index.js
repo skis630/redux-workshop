@@ -10,7 +10,7 @@ export default class FoodItem extends React.Component {
         <div className="food_image_container">
           <img src={image} />
         </div>
-        <h5>{name}</h5>
+        <a href={`https://en.wikipedia.org/wiki/${name}`}><h5>{name}</h5></a>
       </div>
     );
   }

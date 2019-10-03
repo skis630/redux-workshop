@@ -10,6 +10,27 @@ export default class AddFoodPage extends React.Component {
     this.state = {
       foods: DEFAULT_FOODS
     };
+
+    this.addFood = this.addFood.bind(this);
+  }
+
+  addFood() {
+    let name = document.getElementById("food-name").value;
+    let img = document.getElementById("food-img").value;
+
+    let newFood = {
+      id: name,
+      name,
+      image: img
+    } 
+
+    let newFoodList = [...DEFAULT_FOODS, newFood]
+    console.log(JSON.stringify(newFood));
+    console.log(newFoodList[0])
+
+    this.setState({
+      foods: newFoodList
+    });
   }
 
   render() {
@@ -22,13 +43,13 @@ export default class AddFoodPage extends React.Component {
           <form>
             <label>
               <span className="input_label">Food name:</span>
-              <input className="food_name"></input>
+              <input id="food-name" className="food_name"></input>
             </label>
             <label>
               <span className="input_label">Food image:</span>
-              <input className="food_image"></input>
+              <input id="food-img" className="food_image" type="url"></input>
             </label>
-            <button className="submit_new_food" type="button">
+            <button className="submit_new_food" type="button" onClick={this.addFood}>
               Add food
             </button>
           </form>
