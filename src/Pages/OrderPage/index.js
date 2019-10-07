@@ -55,7 +55,7 @@ export default class OrderPage extends React.Component {
             </label>
             <label className="order_input_container">
               <span>Foods:</span>
-              <ul>{foods.map(food => this.renderSelectableFood(food))}</ul>
+              <ul>{this.props.foods.map(food => this.renderSelectableFood(food))}</ul>
             </label>
           </form>
           <button>Submit order</button>

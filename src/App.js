@@ -4,6 +4,7 @@ import AddFoodPage from "./Pages/AddFoodPage";
 import OrderPage from "./Pages/OrderPage";
 import OrdersListPage from "./Pages/OrdersListPage";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import DEFAULT_FOODS from './data/foods.json'; 
 
 const ADD_FOOD = "ADD_FOOD";
 const ORDER = "ORDER";
@@ -28,6 +29,25 @@ const PAGES = {
 };
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.addFood = this.addFood.bind(this);
+
+    this.state = {
+      foods: DEFAULT_FOODS
+    }
+  }
+
+  addFood(newFood) {
+    let newFoodList = [...DEFAULT_FOODS, newFood]
+    console.log(JSON.stringify(newFood));
+    console.log(newFoodList[0])
+
+    this.setState({
+      foods: newFoodList
+    });
+  }
+
   render() {
     return (
       <Router>
@@ -52,7 +72,9 @@ export default class App extends React.Component {
           </header>
           <div className="page_container">
             {Object.values(PAGES).map(page => (
-              <Route key={page.route} path={page.route} component={page.component} />
+              <Route key={page.route} path={page.route}  
+                     render={(props) => <page.component {...props} foods={this.state.foods} 
+                     addFood={(newFood) => this.addFood(newFood)} />} />
             ))}
           </div>
         </div>
